@@ -5,13 +5,39 @@
 
         <div class="table-container">
             <div class="table-col">
-                <RestaurantRow></RestaurantRow>
+                <RestaurantRow :isHeader="true"></RestaurantRow>
+                <RestaurantRow v-for="(restaurant, index) in restaurantsOrganized.first" 
+                    :key="restaurant" 
+                    :name="restaurant.name"
+                    :rank="restaurant.rank"
+                    :index="index"></RestaurantRow>
             </div>
-            <div class="table-col"></div>
+            <div class="table-col">
+                <RestaurantRow :isHeader="true"></RestaurantRow>
+                <RestaurantRow v-for="(restaurant, index) in restaurantsOrganized.second"
+                :key="restaurant"
+                :name="restaurant.name"
+                :rank="restaurant.rank"
+                :index = "index"></RestaurantRow>
+            </div>
         </div>
     </div>
 
 </template>
+
+
+
+
+<script setup lang="ts">
+    import restaurants from '@/data.json';
+
+    const restaurantsOrganized = {
+        first: [...restaurants].splice(0, 25),
+        second: [...restaurants].splice(25, 25)
+    }
+
+</script>
+
 
 
 
