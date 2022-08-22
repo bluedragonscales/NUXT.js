@@ -7,7 +7,7 @@
             <div class="table-col">
                 <RestaurantRow :isHeader="true"></RestaurantRow>
                 <RestaurantRow v-for="(restaurant, index) in restaurantsOrganized.first" 
-                    :key="restaurant" 
+                    :key="restaurant.id" 
                     :name="restaurant.name"
                     :rank="restaurant.rank"
                     :index="index"></RestaurantRow>
@@ -15,7 +15,7 @@
             <div class="table-col">
                 <RestaurantRow :isHeader="true"></RestaurantRow>
                 <RestaurantRow v-for="(restaurant, index) in restaurantsOrganized.second"
-                :key="restaurant"
+                :key="restaurant.id"
                 :name="restaurant.name"
                 :rank="restaurant.rank"
                 :index = "index"></RestaurantRow>
