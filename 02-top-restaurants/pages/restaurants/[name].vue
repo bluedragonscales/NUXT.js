@@ -1,40 +1,42 @@
 <template>
+    <div>
 
-    <NuxtLayout name="ad-layout" v-if="restaurant">
-        <div class="restaurant-container">
+        <NuxtLayout name="ad-layout" v-if="restaurant">
+            <div class="restaurant-container">
 
-            <div class="image-container">
-                <img :src="restaurant.imageUrl" alt="">
-            </div>
-
-            <div class="info-container">
-                <h1>{{restaurant.name}}</h1>
-
-                <div class="stats-container">
-                    <h5>Revenue (in billions)</h5>
-                    <p>${{restaurant.revenue}}</p>
+                <div class="image-container">
+                    <img :src="restaurant.imageUrl" alt="">
                 </div>
 
-                <div class="stats-container">
-                    <h5>Number of Stores</h5>
-                    <p>{{restaurant.numberOfStores}}</p>
+                <div class="info-container">
+                    <h1>{{restaurant.name}}</h1>
+
+                    <div class="stats-container">
+                        <h5>Revenue (in billions)</h5>
+                        <p>${{restaurant.revenue}}</p>
+                    </div>
+
+                    <div class="stats-container">
+                        <h5>Number of Stores</h5>
+                        <p>{{restaurant.numberOfStores}}</p>
+                    </div>
+
+                    <p class="content">{{restaurant.content}}</p>
                 </div>
-
-                <p class="content">{{restaurant.content}}</p>
             </div>
+        </NuxtLayout>
+
+        <div v-else class="restaurant-not-found text-center">
+            <NuxtLayout name="error-layout">
+
+                <template #header>
+                    <h2 class="mt-5">Restaurant not found</h2>
+                </template>
+
+            </NuxtLayout>
         </div>
-    </NuxtLayout>
 
-    <div v-else class="restaurant-not-found">
-        <h3>Restaurant not found</h3>
-
-        <div>
-            <img src="https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png" alt="Sad face emoji">
-        </div>
-
-        <button class="btn btn-primary btn-lg mt-5" @click="$router.push('/')">Go Back</button>
     </div>
-
 </template>
 
 
@@ -46,6 +48,10 @@
     const name = route.params.name;
 
     const restaurant = restaurants.find(response => response.name === name);
+
+    useHead({
+        title: restaurant ? name : "404 Restaurant Not Found"
+    });
 
 </script>
 
