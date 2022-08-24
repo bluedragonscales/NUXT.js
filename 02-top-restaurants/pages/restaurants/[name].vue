@@ -1,7 +1,6 @@
 <template>
-    <Nav></Nav>
 
-     <div>
+    <NuxtLayout name="ad-layout" v-if="restaurant">
         <div class="restaurant-container">
 
             <div class="image-container">
@@ -24,6 +23,16 @@
                 <p class="content">{{restaurant.content}}</p>
             </div>
         </div>
+    </NuxtLayout>
+
+    <div v-else class="restaurant-not-found">
+        <h3>Restaurant not found</h3>
+
+        <div>
+            <img src="https://www.iconpacks.net/icons/2/free-sad-face-icon-2691-thumb.png" alt="Sad face emoji">
+        </div>
+
+        <button class="btn btn-primary btn-lg mt-5" @click="$router.push('/')">Go Back</button>
     </div>
 
 </template>
@@ -51,13 +60,11 @@
     .image-container {
         width: 75%;
         height: 95vh;
-        margin-top: 2rem;
     }
 
     .image-container img {
         width: 100%;
         height: 100%;
-        float: left;
     }
 
     .restaurant-not-found {
@@ -66,6 +73,11 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .restaurant-not-found img {
+        width: 8rem;
+        margin-top: 2rem;
     }
 
     .info-container {
