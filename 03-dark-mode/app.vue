@@ -3,6 +3,7 @@
 
       <Nav></Nav>
       <Heading></Heading>
+      <Cards></Cards>
 
     </div>
 </template>
