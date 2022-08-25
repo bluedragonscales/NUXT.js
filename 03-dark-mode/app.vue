@@ -2,6 +2,7 @@
     <div>
 
       <Nav></Nav>
+      <Heading></Heading>
 
     </div>
 </template>

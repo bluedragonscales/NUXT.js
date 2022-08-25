@@ -20,12 +20,12 @@
 
     nav {
         border-bottom: 1px solid rgba(73, 72, 72, 0.274);
-        padding: 20px;
+        padding: 10px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.253);
     }
 
     nav div {
-        width: 50%;
+        width: 60%;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
