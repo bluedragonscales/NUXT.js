@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen relative overflow-hidden">
+    <div v-if="city" class="h-screen relative overflow-hidden">
       
         <img :src="background" alt="">
 
@@ -9,7 +9,7 @@
             <div class="flex justify-between">
                 <div>
                     <h1 class="text-7xl text-white">{{city.name}}</h1>
-                    <p class="font-extralight text-2xl mt-2 text-white">Thursday August 25th</p>
+                    <p class="font-extralight text-2xl mt-2 text-white">{{today}}</p>
                     <img :src="`https://openweathermap.org/img/wn/${city.weather[0].icon}@4x.png`" alt="" class="w-56 icon">
                 </div>
 
@@ -23,8 +23,13 @@
                 <button class="bg-sky-400 w-20 text-white h-10" @click="handleClick">Search</button>
             </div>
         </div>
-
     </div>
+
+    <div v-else class="p-10">
+        <h2 class="text-6xl">Oops, we can't find that city.</h2>
+        <button class="mt-8 bg-sky-400 px-12 w-45 text-white h-8 text-2xl" @click="goBack">Go back</button>
+    </div>
+
 </template>
 
 
@@ -74,11 +79,23 @@
         watch: [search]
     });
 
+    let day = new Date();
+    let today = day.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+
     const handleClick = () => {
         const formattedSearch = input.value.trim().split(" ").join("+");
         search.value = formattedSearch;
         input.value = "";
-    }
+    };
+
+    const goBack = () => {
+        search.value = cookie.value;
+    };
 
 </script>
 
