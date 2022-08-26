@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style="isDarkMode ? {backgroundColor: 'black'} : null">
 
       <Nav></Nav>
       <Heading></Heading>
@@ -7,6 +7,14 @@
 
     </div>
 </template>
+
+
+
+<script setup lang="ts">
+
+    const {isDarkMode} = useDarkMode();
+
+</script>
 
 
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" :style="isDarkMode ? {backgroundColor: 'black', color: 'white'} : null">
 
         <img :src="card.img" alt="">
 
@@ -14,6 +14,8 @@
 
 
 <script setup lang="ts">
+
+    const {isDarkMode} = useDarkMode();
 
     interface CardProps {
         card: {
@@ -34,7 +36,7 @@
     .card {
         box-shadow: 1px 1px 5px black;
         background: white;
-        width: 30%;
+        width: 40%;
         margin-bottom: 30px;
         border-radius: 5px;
         overflow: hidden;

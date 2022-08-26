@@ -5,11 +5,11 @@
             <div class="text-container">
                 <h4>Based on your reading history</h4>
 
-                <h2>Designing search for mobile apps</h2>
+                <h2 :style="isDarkMode ? {color: 'white'} : null">Designing search for mobile apps</h2>
 
-                <p class="date">Aug 26th, 2021, 4pm</p>
+                <p class="date" :style="isDarkMode ? {color: 'white'} : null">Aug 26th, 2021, 4pm</p>
 
-                <p class="snippet">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, in. Obcaecati in iusto minima impedit assumenda perferendis natus tempore modi ducimus. Blanditiis, quis. Maxime delectus ducimus assumenda vel accusantium, eligendi nobis accusamus fuga, hic, natus ab odit. Earum, eveniet magnam perspiciatis similique odit cupiditate optio aut fugit, inventore, dolorem id?</p>
+                <p class="snippet" :style="isDarkMode ? {color: 'white'} : null">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, in. Obcaecati in iusto minima impedit assumenda perferendis natus tempore modi ducimus. Blanditiis, quis. Maxime delectus ducimus assumenda vel accusantium, eligendi nobis accusamus fuga, hic, natus ab odit. Earum, eveniet magnam perspiciatis similique odit cupiditate optio aut fugit, inventore, dolorem id?</p>
             </div>
 
             <img src="https://media.istockphoto.com/photos/mobile-responsive-website-development-wireframe-design-preview-on-picture-id844419966?b=1&k=20&m=844419966&s=170667a&w=0&h=Dfps34xqMI2CaLkKMznJnESU4G_XY5evvlC9ui9XEJk=" alt="">
@@ -17,6 +17,14 @@
         
     </div>
 </template>
+
+
+
+<script setup lang="ts">
+
+    const {isDarkMode} = useDarkMode();
+
+</script>
 
 
 

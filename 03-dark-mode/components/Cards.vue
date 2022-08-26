@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
+    <div class="container" :style="isDarkMode ? {backgroundColor: 'rgb(73, 72, 72)'} : null">
 
         <div class="content-container">
-            <h3>Reading List</h3>
+            <h3 :style="isDarkMode ? {color: 'white'} : null">Reading List</h3>
 
             <div class="cards-container">
                 <Card v-for="(card, index) in cards" :key="index" :card="card"></Card>
@@ -16,6 +16,8 @@
 
 
 <script setup lang="ts">
+
+    const {isDarkMode} = useDarkMode();
 
     const cards = [
         {
@@ -58,7 +60,7 @@
 <style scoped>
 
     .container {
-        margin: 30px 0;
+        margin: 30px 0 0;
         background: rgba(250, 250, 194, 0.637);
     }
 
