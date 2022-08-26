@@ -6,7 +6,8 @@ const useDarkMode = () => {
     };
 
     return {
-        isDarkMode
+        isDarkMode,
+        toggleDarkMode
     };
 };
 
