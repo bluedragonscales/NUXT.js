@@ -50,7 +50,7 @@
             response = await $fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search.value}`, {
                 params: {
                     units: "metric",
-                    appid: config.WEATHER_APP_SECRET
+                    appid: config.public.WEATHER_APP_SECRET
                 }
             });
 
