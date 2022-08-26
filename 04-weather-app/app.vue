@@ -33,6 +33,7 @@
     // https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=b28aeb3786325cf19ae1dcda977fa5bf
 
     const cookie = useCookie("city");
+    const config = useRuntimeConfig()
 
     if(!cookie.value) cookie.value = "Toronto";
 
@@ -46,7 +47,12 @@
         let response;
         
         try {
-            response = await $fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search.value}&units=metric&appid=b28aeb3786325cf19ae1dcda977fa5bf`);
+            response = await $fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search.value}`, {
+                params: {
+                    units: "metric",
+                    appid: config.WEATHER_APP_SECRET
+                }
+            });
 
             cookie.value = search.value;
 
