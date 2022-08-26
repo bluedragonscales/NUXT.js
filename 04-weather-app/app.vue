@@ -32,26 +32,36 @@
 <script setup lang="ts">
     // https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=b28aeb3786325cf19ae1dcda977fa5bf
 
-    const search = ref("Toronto");
+    const cookie = useCookie("city");
+
+    if(!cookie.value) cookie.value = "Toronto";
+
+    const search = ref(cookie.value);
     const input = ref("");
     const background = ref("");
 
     // const {data: city, error} = useFetch(() => `https://api.openweathermap.org/data/2.5/weather?q=${search.value}&units=metric&appid=b28aeb3786325cf19ae1dcda977fa5bf`);
 
     const {data: city, error} = useAsyncData("cityKey", async () => {
-        const response = await $fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search.value}&units=metric&appid=b28aeb3786325cf19ae1dcda977fa5bf`);
+        let response;
+        
+        try {
+            response = await $fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search.value}&units=metric&appid=b28aeb3786325cf19ae1dcda977fa5bf`);
 
-        const temperature = response.main.temp;
+            cookie.value = search.value;
 
-        if(temperature <= -10){
-            background.value = "https://img.rasset.ie/0015d72f-1600.jpg";
-        } else if(temperature > -10 && temperature <= 0){
-            background.value = "https://govbooktalk.files.wordpress.com/2019/09/fall.jpg";
-        } else if(temperature > 0 && temperature <=10){
-            background.value = "https://cdn.mos.cms.futurecdn.net/tXr5UjKDsDBrYBQM9znb2c.jpg";
-        } else {
-            background.value = "https://media.cntraveler.com/photos/5ca2606227413200230736ae/master/pass/Summer-Travel_GettyImages-1028278382.jpg";
-        }
+            const temperature = response.main.temp;
+
+            if(temperature <= -10){
+                background.value = "https://img.rasset.ie/0015d72f-1600.jpg";
+            } else if(temperature > -10 && temperature <= 0){
+                background.value = "https://govbooktalk.files.wordpress.com/2019/09/fall.jpg";
+            } else if(temperature > 0 && temperature <=10){
+                background.value = "https://cdn.mos.cms.futurecdn.net/tXr5UjKDsDBrYBQM9znb2c.jpg";
+            } else {
+                background.value = "https://media.cntraveler.com/photos/5ca2606227413200230736ae/master/pass/Summer-Travel_GettyImages-1028278382.jpg";
+            }
+        } catch(e) {}
 
         return response;
     }, {
