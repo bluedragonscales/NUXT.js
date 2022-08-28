@@ -1,6 +1,7 @@
 import { db } from "~~/server/db";
 import {v4 as uuid} from 'uuid';
 
+
 export default defineEventHandler(async (ev) => {
     const method = ev.req.method;
 
@@ -11,7 +12,15 @@ export default defineEventHandler(async (ev) => {
     if(method === "POST"){
         const body = await useBody(ev);
         
-        if(!body.item) throw new Error();
+        if(!body.item){
+            const ToDoNotProvidedError = createError({
+                statusCode: 400,
+                statusMessage: "No to-do item provided.",
+                data: {}
+            });
+
+            sendError(ev, ToDoNotProvidedError);
+        }
 
         const newToDo = {
             id: uuid(),
