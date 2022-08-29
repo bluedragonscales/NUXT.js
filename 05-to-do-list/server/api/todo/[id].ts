@@ -6,6 +6,7 @@ export default defineEventHandler((ev) => {
     const context = ev.context;
     const {id} = context.params;
 
+
     const findToDoById = (toDoId) => {
         let index;
 
@@ -33,6 +34,7 @@ export default defineEventHandler((ev) => {
 
 
     if(method === "PUT"){
+
         const {todo, index} = findToDoById(id);
 
         const updatedToDo = {

@@ -20,17 +20,17 @@ export default defineEventHandler(async (ev) => {
             });
 
             sendError(ev, ToDoNotProvidedError);
+        } else {
+            const newToDo = {
+                id: uuid(),
+                item: body.item,
+                completed: false
+            };
+    
+            db.todos.push(newToDo);
+    
+            return newToDo;
         }
-
-        const newToDo = {
-            id: uuid(),
-            item: body.item,
-            completed: false
-        };
-
-        db.todos.push(newToDo);
-
-        return newToDo;
     }
     
 })
