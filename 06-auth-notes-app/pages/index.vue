@@ -3,10 +3,19 @@
 
         <div class="container">
             <AuthCard></AuthCard>
+            {{supabase}}
         </div>
         
     </div>
 </template>
+
+
+
+<script setup lang="ts">
+
+    const {supabase} = useSupabase();
+
+</script>
 
 
 
