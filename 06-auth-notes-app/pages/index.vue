@@ -3,7 +3,6 @@
 
         <div class="container">
             <AuthCard></AuthCard>
-            {{supabase}}
         </div>
         
     </div>
