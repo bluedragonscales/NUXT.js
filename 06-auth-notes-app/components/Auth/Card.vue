@@ -2,19 +2,25 @@
     <div>
         
         <NCard class="card">
-            <h3>{{authState}}</h3>
+            <div v-if="!showConfirmEmailMessage">
+                <h3>{{authState}}</h3>
 
-            <div class="input-container">
-                <input type="text" placeholder="Email" v-model="input.email">
-                <input type="password" placeholder="Password" v-model="input.password">
+                <div class="input-container">
+                    <input type="text" placeholder="Email" v-model="input.email">
+                    <input type="password" placeholder="Password" v-model="input.password">
+                </div>
+
+                <NButton @click="handleSubmit">{{authState}}</NButton>
+                <!-- <NButton @click="logOut">Log Out</NButton> -->
+
+                <p class="error-message" v-if="authError">{{authError}}</p>
+
+                <p class="create-account-p" @click="toggleAuthState">{{authState === "Log In" ? "Don't have an account? Create one now." : "Already have an account? Log in here."}}</p>
             </div>
 
-            <NButton @click="handleSubmit">{{authState}}</NButton>
-            <!-- <NButton @click="logOut">Log Out</NButton> -->
-
-            <p class="error-message" v-if="authError">{{authError}}</p>
-
-            <p class="create-account-p" @click="toggleAuthState">{{authState === "Log In" ? "Don't have an account? Create one now." : "Already have an account? Log in here."}}</p>
+            <div v-else>
+                <h3 class="confirmation-check">Check your email for confirmation message.</h3>
+            </div>
         </NCard>
 
     </div>
@@ -31,6 +37,8 @@
         email: "",
         password: ""
     });
+    const showConfirmEmailMessage = ref(false);
+    const router = useRouter();
 
     const toggleAuthState = () => {
         if(authState.value === "Log In") authState.value = "Sign Up";
@@ -43,8 +51,10 @@
         try {
             if(authState.value === "Log In"){
                 await logIn({email: input.email, password: input.password});
+                router.push("/profile");
             } else {
                 await signUp({email: input.email, password: input.password});
+                showConfirmEmailMessage.value = true;
             }
 
             input.email = "";
@@ -95,6 +105,10 @@
         color: red;
         padding: 1rem;
         font-size: 1.2rem;
+    }
+
+    .confirmation-check {
+        text-align: center;
     }
 
 </style>
