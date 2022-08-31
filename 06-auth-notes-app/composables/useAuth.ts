@@ -38,11 +38,18 @@ const useAuth = () => {
     };
 
 
+    const isLoggedIn = () => {
+        // The double exclamation is the request for the truthy/falsy value. Is that object true or false?
+        return !!user.value;
+    };
+
+
     return {
         user,
         signUp,
         logIn,
-        logOut
+        logOut,
+        isLoggedIn
     };
 };
 
